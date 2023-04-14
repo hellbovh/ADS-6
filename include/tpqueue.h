@@ -33,16 +33,14 @@ void TPQueue<T, size>::push(const T& value) {
     if (isFull()) {
         throw std::string("Queue is full!");
     } else {
-        int temp = last - 1;
-        while (temp >= first && value.prior > arr[temp].prior) {
-            arr[temp + 1] = arr[temp];
-            temp--;
-        }
-        arr[temp + 1] = value;
-        last++;
         count++;
-        if (last > size) {
-            last -= size;
+        int t_last = last;
+        arr[last++ % size] = value;
+        while (t_last > first && arr[t_last % size].prior > arr[(t_last - 1) % size].prior) {
+            T temp = arr[t_last % size];
+            arr[t_last % size] = arr[(t_last - 1) % size];
+            arr[(t_last - 1) % size] = temp;
+            t_last--;
         }
     }
 }
