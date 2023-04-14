@@ -61,7 +61,6 @@ const T& TPQueue<T, size>::pop() {
 		return data;
 	}
 }
-};
 
 struct SYM {
   char ch;
